@@ -1,0 +1,44 @@
+{
+  "accounts": [
+    {
+      "id": 1,
+      "login": "jksenby",
+      "password": "2005zha",
+      "pokemons": [
+        {
+          "id": 12,
+          "name": "butterfree",
+          "thumb": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
+          "types": [
+            {
+              "slot": 1,
+              "type": {
+                "name": "bug",
+                "url": "https://pokeapi.co/api/v2/type/7/"
+              }
+            },
+            {
+              "slot": 2,
+              "type": {
+                "name": "flying",
+                "url": "https://pokeapi.co/api/v2/type/3/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3436b31f-b52f-4214-8cfe-80f8cfbab0fb",
+      "login": "Zhanik",
+      "password": "123456",
+      "pokemons": []
+    },
+    {
+      "id": "9f41363c-b03e-4eda-9e76-f4fc8ab4dcae",
+      "login": "Kali",
+      "password": "123456",
+      "pokemons": []
+    }
+  ]
+}
