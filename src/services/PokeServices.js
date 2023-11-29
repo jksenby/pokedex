@@ -8,7 +8,7 @@ const PokeServices = () => {
   };
   const getResource = async (property, i) => {
     try {
-      const url = `${_apiBase}${property}${i}`;
+      const url = `${_apiBase}${property}/${i}`;
       const response = await fetch(url, options);
       if (!response.ok)
         throw new Error(`Could not fetch ${url}, status: ${response.status}`);
@@ -18,8 +18,12 @@ const PokeServices = () => {
     }
   };
   const getPokemon = async (id) => {
-    const pokemon = await getResource("pokemon", "/" + id);
+    const pokemon = await getResource("pokemon", id);
     return _transformPokemon(pokemon);
+  };
+  const getDescription = async (id) => {
+    const description = await getResource("pokemon-species", id);
+    return description.flavor_text_entries[0].flavor_text;
   };
 
   const _transformPokemon = (pokemon) => {
@@ -37,7 +41,7 @@ const PokeServices = () => {
     };
   };
 
-  return { getPokemon };
+  return { getPokemon, getDescription };
 };
 
 export default PokeServices;

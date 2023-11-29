@@ -11,6 +11,7 @@ const pokeAdapter = createEntityAdapter();
 
 const initialState = pokeAdapter.getInitialState({
   pokeLoadingStatus: "idle",
+  description: null,
 });
 
 export const fetchPokemon = createAsyncThunk(
@@ -24,7 +25,17 @@ export const fetchPokemon = createAsyncThunk(
     return fetchData();
   }
 );
-
+export const fetchDescription = createAsyncThunk(
+  "pokemon/fetchDescription",
+  async (id) => {
+    const fetchData = async () => {
+      const { getDescription } = PokeServices();
+      const res = await getDescription(id);
+      return res;
+    };
+    return fetchData();
+  }
+);
 export const fetchPokedex = createAsyncThunk(
   "pokedex/fetchPokedex",
   async (page) => {
@@ -73,6 +84,16 @@ const pokeSlice = createSlice({
         pokeAdapter.addOne(state, action.payload);
       })
       .addCase(fetchPokemon.rejected, (state) => {
+        state.pokeLoadingStatus = "error";
+      })
+      .addCase(fetchDescription.pending, (state) => {
+        state.pokeLoadingStatus = "loading";
+      })
+      .addCase(fetchDescription.fulfilled, (state, action) => {
+        state.pokeLoadingStatus = "idle";
+        state.description = action.payload;
+      })
+      .addCase(fetchDescription.rejected, (state) => {
         state.pokeLoadingStatus = "error";
       })
       .addDefaultCase(() => {});
